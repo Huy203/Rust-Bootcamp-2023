@@ -4,15 +4,28 @@
 // - another function call
 // - additional variables
 pub fn bigger(a: i32, b: i32) -> i32 {
-    todo!()
+    if a > b{
+        a
+    }
+    else{
+        b
+    }
 }
 
 //Exercise 2
 // Input: Provide an arbitrary value of number
 // Check number is Positive or Negative or Zero
 // Output: &str
-fn check_number(number: u32) -> &'static str {
-    todo!()
+fn check_number(number: i32) -> &'static str {
+    if number > 0{
+        "Positive"
+    }
+    else if number <0{
+        "Negative"    
+    }
+    else{
+        "Zero"
+    }
 }
 
 // Exercise 3
@@ -21,32 +34,53 @@ fn check_number(number: u32) -> &'static str {
 
 pub fn foo_if_fizz(fizzish: &str) -> &str {
     if fizzish == "fizz" {
-        "foo"
-    } else {
-        1
+        return "foo"
+    } 
+    else if fizzish == "fuzz" {
+        return "bar"
+    }
+    else {
+        return "baz"
     }
 }
 
 // Exercise 4
 // Determine if a given year is a leap year
 // Implement logic
-fn is_leap_year(year: i32) -> bool {
-    todo!()
+fn is_leap_year(_year: i32) -> bool {
+    if (_year % 4 == 0 && _year % 100 != 0) || (_year % 400 == 0){
+        return true
+    }
+    else{
+        return false
+    }
 }
 
 // Exercise 5
 // Calculate the factorial of a number
 // Implement logic
-fn factorial(n: u32) -> u32 {
-    todo!()
+fn factorial(_n: u32) -> u32 {
+    let mut factorial: u32 = 1;
+    for i in 1..=_n {
+        factorial *= i;
+    }
+    return factorial
 }
 
 // Exercise 6
 // Check if a number is prime
 // Implement logic
 
-fn is_prime(n: u32) -> bool {
-    todo!()
+fn is_prime(_n: u32) -> bool {
+    if 1 == _n {
+        return false
+    }
+    for i in 2.._n {
+        if _n % i == 0 {
+            return false
+        }
+    }
+    return true
 }
 
 
