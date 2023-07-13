@@ -1,18 +1,30 @@
 // Exercise 1
 // Fill in the blank and fix the errors
 // Make it compile
+
+use std::fmt;
 enum MessageOne {
     Quit,
     Move { x: i32, y: i32 },
     Write(String),
     ChangeColor(i32, i32, i32),
 }
+
+impl fmt::Display for MessageOne {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            MessageOne::Quit => write!(f, "Quit"),
+            MessageOne::Move { x, y } => write!(f, "Move (x: {}, y: {})", x, y),
+            MessageOne::Write(text) => write!(f, "Write: {}", text),
+            MessageOne::ChangeColor(r, g, b) => write!(f, "ChangeColor (r: {}, g: {}, b: {})", r, g, b),
+        }
+    }
+}
 fn show_message(msg: MessageOne) {
     println!("{}", msg);
 }
-
 fn exercise1() {
-    let msgs: __ = [
+    let msgs: [MessageOne;3] = [
         MessageOne::Quit,
         MessageOne::Move { x: 1, y: 3 },
         MessageOne::ChangeColor(255, 255, 0),
@@ -29,6 +41,10 @@ fn exercise1() {
 // Run tests
 enum Message {
     // TODO: implement the message variant types based on their usage below
+    ChangeColor(i32,i32,i32),
+    Move(Point),
+    Echo(String),
+    Quit,
 }
 
 struct Point {
@@ -62,13 +78,20 @@ impl State {
     fn process(&mut self, message: Message) {
         // TODO: create a match expression to process the different message variants
         // Remember: When passing a tuple as a function argument, you'll need extra parentheses: fn function((t, u, p, l, e))
+        match message {
+            Message::ChangeColor(r,b,g) => self.change_color((r as u8,b as u8,g as u8)),
+            Message::Move(point) => self.move_position( point),
+            Message::Echo(string) => self.echo( string),
+            Message::Quit => self.quit(),
+
+        }
     }
 }
-
 
 // Exercise 3
 // Fix the errors
 // Run tests
+#[derive(Debug, PartialEq)]
 enum Direction {
     North,
     East,
@@ -79,7 +102,10 @@ enum Direction {
 impl Direction {
     fn opposite(&self) -> Direction {
         match self {
-            //TODO
+            Self::North => Direction::South,
+            Self::South => Direction::North,
+            Self::East => Direction::West,
+            Self::West => Direction::East
         }
     }
 }
@@ -99,7 +125,10 @@ enum Operation {
 // Perform arithmetic operations
 fn perform_operation(operation: Operation, num1: f64, num2: f64) -> f64 {
     match operation {
-        // TODO
+        Operation::Add => num1 + num2,
+        Operation::Subtract => num1 - num2,
+        Operation::Multiply => num1 * num2,
+        Operation::Divide => num1 / num2,
     }
 }
 
