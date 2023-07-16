@@ -74,8 +74,8 @@ fn static_dispatch<T:Foo>(x:T) {
 }
 
 // Implement below with trait objects and parameters
-fn dynamic_dispatch(_x: &dyn Foo) {
-
+fn dynamic_dispatch(x: &dyn Foo) {
+    x.method();
 }
 
 // Exercise 5 
